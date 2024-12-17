@@ -4,10 +4,38 @@
 
 ---
 
-React, TypeScript  
-Tanstack Query, Zustand,  
-Styled-components, React Router  
+React
+- UI를 재사용 가능한 컴포넌트로 나누어 개발 효율과 유지보수성
+- 많은 개발자와 기업이 사용하고 있어 참고 자료와 라이브러리가 풍부
+- 렌더링 성능을 최적화하며 효율적으로 UI를 업데이트  
+
+TypeScript  
+- 정적 타입 검사
+- 코드 자동 완성, 리팩토링 지원 등 개발 생산성을 극대화
+- 큰 프로젝트에서도 유지보수하기 쉽고 협업에 유리
+
+Tanstack Query
+- 서버 상태를 클라이언트에 일관되게 유지하고 캐싱, 백그라운드 리페치 등을 제공
+- 데이터 변경 시 자동으로 다시 가져와서 수동으로 상태를 관리할 필요가 없음
+- 상태 관리 코드가 줄어들어 개발이 간결해지고, 로딩/에러 상태도 쉽게 처리
+- 중복 요청 방지, 캐시를 통한 빠른 응답 등으로 네트워크 성능을 개선
+
+Zustand
+- Redux와 비교해 설정이 간단하고 코드가 직관적
+- useStore를 통해 상태에 직접 접근하고 업데이트
+
+Styled-components
+- CSS-in-JS: JavaScript 파일 내에서 스타일을 작성할 수 있어 컴포넌트와 스타일을 한 곳에서 관리
+- 동적 스타일링: props와 상태에 따라 동적으로 스타일을 변경
+
+React Router  
+- SPA에서 URL 기반으로 페이지를 이동하고 렌더링
+- Nested Routes: 중첩된 라우팅 구조를 지원해 복잡한 UI도 간단하게 구성
+
 eslint + prettier  
+- 일관된 코드 스타일을 유지하고 문법 오류를 방지
+- Prettier를 통해 코드를 자동으로 정리하고 가독성을 높임
+- 팀 협업 최적화, 개발 생산성 향상
 
 # Convention
 ## Branch
