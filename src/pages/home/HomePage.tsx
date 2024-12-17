@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Header from '../components/common/Header.tsx';
-import CardWidget from '../components/home/CardWidget.tsx';
+import Header from '../../components/common/Header.tsx';
+import CardWidget from '../../components/home/CardWidget.tsx';
 
 const HomePage = () => {
 
