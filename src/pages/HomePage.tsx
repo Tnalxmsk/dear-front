@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Header from '../components/common/Header.tsx';
+import CardWidget from '../components/home/CardWidget.tsx';
 
 const HomePage = () => {
+
   return (
     <Container>
       <Header />
-      <Inner>
-        Test
-      </Inner>
+        <CardWidget />
     </Container>
   );
 };
@@ -21,12 +21,5 @@ const Container = styled.div`
   text-align: center;
   width: 100%;
   height: 100vh;
-`;
-
-const Inner = styled.div`
-  margin-top: 78px;
-  font-size: 30px;
-  width: 100vw;
-  height: 723px;
-  background-color: ${({ theme }) => theme.colors.black35};
+  padding-top: 13vh;
 `;
