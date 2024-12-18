@@ -4,9 +4,9 @@ import CardWidget from '../../components/home/CardWidget.tsx';
 const HomePage = () => {
   return (
     <Container>
-      <Section style={{ backgroundImage: 'url("/src/assets/home-background.png")' }}>
+      <Section style={{ backgroundImage: 'url("/src/assets/bg-home.png")' }}>
       </Section>
-      <Section style={{ backgroundImage: 'url("/src/assets/home-background-bottom.png")' }}>
+      <Section style={{ backgroundImage: 'url("/src/assets/bg-home-bottom.png")' }}>
         <CardWidget />
       </Section>
     </Container>
