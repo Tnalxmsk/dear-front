@@ -25,16 +25,15 @@ export default Pagination;
 const PageWrapper = styled.div`
   position: absolute;
   left: 50%;
-  bottom: 2.375rem; 
+  bottom: 2.375rem;
   transform: translateX(-50%);
   width: 6.4375rem;
   height: 1.9375rem;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
-  padding: 0 0.625rem; 
+  padding: 0 0.625rem;
 `;
-
 
 const PageButton = styled.button`
   background: none;
