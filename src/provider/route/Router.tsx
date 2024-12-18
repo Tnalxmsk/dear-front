@@ -3,9 +3,9 @@ import HomePage from '../../pages/home/HomePage.tsx';
 import WritePage from '../../pages/write/WritePage.tsx';
 import BoxPage from '../../pages/BoxPage.tsx';
 import RootLayout from '../../layout/RootLayout.tsx';
-import MailboxPage from '../../pages/LetterboxPage.tsx';
 import LetterDetail from '../../pages/LetterDetail.tsx';
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
+import LetterboxPage from '../../pages/LetterboxPage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -29,13 +29,9 @@ export const router = createBrowserRouter([
         element: <BoxPage />,
       },
       {
-        path: 'mailbox',
-        element: <MailboxPage />,
-      },
-      {
-        path: 'letterbox/:title',
-        element: <LetterDetail />,
-      },
+        path: 'letterbox',
+        element: <LetterboxPage />,
+      }
     ],
   },
 ]);
