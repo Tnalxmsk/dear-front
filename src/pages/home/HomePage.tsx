@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import Header from '../../components/common/Header.tsx';
 import CardWidget from '../../components/home/CardWidget.tsx';
 
 const HomePage = () => {
-
   return (
     <Container>
-      <Header />
+      <Section style={{ backgroundImage: 'url("/src/assets/home-background.png")' }}>
+      </Section>
+      <Section style={{ backgroundImage: 'url("/src/assets/home-background-bottom.png")' }}>
         <CardWidget />
+      </Section>
     </Container>
   );
 };
@@ -15,11 +16,19 @@ const HomePage = () => {
 export default HomePage;
 
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  padding-top: 13vh;
+  overflow-y: scroll;
+  margin: 0;
+  padding: 0;
 `;
+
+const Section = styled.div`
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
