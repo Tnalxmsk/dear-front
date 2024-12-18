@@ -5,28 +5,27 @@ const CardContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  width: 145px;
-  height: 160px;
-  gap: 20px;
-  border: none;
-  padding: 20px 30px 15px 30px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-  background-color: white;
+  border-radius: 5px;
+  width: 200px;
+  height: 200px;
+  border: 1px solid #fcfcfc;
 `;
 
 const CardImage = styled.div`
-  width: 85px;
-  height: 85px;
-  border-radius: 10px;
+  margin-top: 10px;
+  width: 170px;
+  height: 170px;
   border: none;
-  background: ${({ theme }) => theme.colors.black100} url('/src/assets/letter.svg') no-repeat center;
+  background-size: auto; /* 이미지 크기에 맞게 */
+  background-position: center; /* 중앙 기준 */
+  background-repeat: no-repeat; /* 반복 방지 */
 `;
 
 const Title = styled.div`
+  margin-bottom: 10px;
   text-align: center;
-  font: ${({ theme }) => theme.fonts.paragraph_regular_14px};
-  color: black;
+  font: ${({ theme }) => theme.fonts.heading_regular_22px};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export { CardContainer, CardImage, Title };
