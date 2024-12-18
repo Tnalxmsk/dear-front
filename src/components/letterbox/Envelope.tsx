@@ -97,7 +97,7 @@ const SaveIcon = styled.img<{ isClicked: boolean }>`
   height: 30px;
   cursor: pointer;
   z-index: 1;
-  transition: top 0.3s ease-in-out, right 0.3s ease-in-out; /* 위치 변화 부드럽게 */
+  transition: top 0.3s ease-in-out, right 0.3s ease-in-out; 
 `;
 
 
