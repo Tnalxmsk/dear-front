@@ -18,8 +18,6 @@ const Header = () => {
 export default Header;
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 0;
   display: flex;
   flex-direction: row;
   width: 100vw;
