@@ -7,16 +7,18 @@ import Tabs from "../components/letterbox/Tabs";
 import LetterList from "../components/letterbox/LetterList";
 import Pagination from "../components/letterbox/Pagination";
 import LetterDetail from './LetterDetail';
-
 const LetterboxPage = () => {
   const itemsPerPage = 10;
   const [currentPage, setCurrentPage] = useState(1);
   const [activeTab, setActiveTab] = useState("total");
   const [savedLetters, setSavedLetters] = useState<number[]>([]);
+  const [letters, setLetters] = useState(
+    lettersData.map((letter) => ({ ...letter, isRead: false })) // 읽음 여부 추가
+  );
   const [nickname] = useState("콩");
   const [selectedLetterId, setSelectedLetterId] = useState<number | null>(null);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const saved = localStorage.getItem("savedLetters");
@@ -27,7 +29,7 @@ const LetterboxPage = () => {
     localStorage.setItem("savedLetters", JSON.stringify(savedLetters));
   }, [savedLetters]);
 
-  const filteredLetters = lettersData.filter((letter) => {
+  const filteredLetters = letters.filter((letter) => {
     if (activeTab === "received") return letter.recipient === nickname;
     if (activeTab === "sent") return letter.sender === nickname;
     if (activeTab === "draft") return letter.sender === nickname && letter.recipient === nickname;
@@ -55,6 +57,11 @@ const LetterboxPage = () => {
   };
 
   const handleLetterClick = (id: number) => {
+    setLetters((prevLetters) =>
+      prevLetters.map((letter) =>
+        letter.id === id ? { ...letter, isRead: true } : letter // 읽음 여부 업데이트
+      )
+    );
     setSelectedLetterId(id); // 편지 선택 시 상세 보기로 전환
   };
 
@@ -65,13 +72,13 @@ const LetterboxPage = () => {
 
   const handlePrevLetter = () => {
     if (selectedLetterId === null) return;
-    const prevLetter = lettersData.find((letter) => letter.id === selectedLetterId - 1);
+    const prevLetter = letters.find((letter) => letter.id === selectedLetterId - 1);
     if (prevLetter) setSelectedLetterId(prevLetter.id);
   };
 
   const handleNextLetter = () => {
     if (selectedLetterId === null) return;
-    const nextLetter = lettersData.find((letter) => letter.id === selectedLetterId + 1);
+    const nextLetter = letters.find((letter) => letter.id === selectedLetterId + 1);
     if (nextLetter) setSelectedLetterId(nextLetter.id);
   };
 
@@ -117,6 +124,7 @@ const LetterboxPage = () => {
 };
 
 export default LetterboxPage;
+
 
 const Container = styled.div`
   display: flex;

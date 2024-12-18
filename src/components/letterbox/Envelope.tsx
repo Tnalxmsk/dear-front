@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styled from "styled-components";
 
 interface EnvelopeProps {
@@ -9,18 +8,12 @@ interface EnvelopeProps {
   onClick: (id: number) => void;
   onSave: (id: number) => void;
   isSaved: boolean;
+  isRead: boolean;
 }
 
-const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved }: EnvelopeProps) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const [isSecondClick, setIsSecondClick] = useState(false); 
-
+const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved, isRead }: EnvelopeProps) => {
   const handleEnvelopeClick = () => {
-    if (!isClicked) {
-      setIsClicked(true); 
-    } else {
-      setIsSecondClick(true);
-    }
+    onClick(id);
   };
 
   const handleSaveClick = (e: React.MouseEvent) => {
@@ -28,28 +21,21 @@ const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved }: Envelop
     onSave(id);
   };
 
-  if (isSecondClick) {
-    setTimeout(() => {
-      onClick(id); 
-      setIsSecondClick(false); 
-    }, 0);
-  }
-
   return (
     <EnvelopeWrapper>
-      <EnvelopeContainer onClick={handleEnvelopeClick} isClicked={isClicked}>
+      <EnvelopeContainer onClick={handleEnvelopeClick} isRead={isRead}>
         <EnvelopeImage
-          src={isClicked ? "/images/clickLetter.png" : "/images/envelope.png"}
+          src={isRead ? "/images/clickLetter.png" : "/images/envelope.png"}
           alt="편지 봉투"
-          isClicked={isClicked}
+          isRead={isRead}
         />
-        {isClicked && <FrameImage src="/images/Frame.png" alt="Frame" />}
+        {isRead && <FrameImage src="/images/Frame.png" alt="프레임 이미지" />}
       </EnvelopeContainer>
       <SaveIcon
         src={isSaved ? "/images/saved2.png" : "/images/saved.png"}
         alt="즐겨찾기 아이콘"
         onClick={handleSaveClick}
-        isClicked={isClicked}
+        isRead={isRead}
       />
       <TextContainer>
         <SenderText>
@@ -69,45 +55,33 @@ const EnvelopeWrapper = styled.div`
   align-items: center;
   justify-content: flex-end;
   width: 212px;
-  height: 221px; 
+  height: 221px;
   margin: 0 auto;
   position: relative;
-  overflow: visible; 
 `;
 
-const EnvelopeContainer = styled.div<{ isClicked: boolean }>`
+const EnvelopeContainer = styled.div<{ isRead: boolean }>`
   position: relative;
-  width: 212px;
-  height: ${({ isClicked }) => (isClicked ? "221px" : "146px")};
+  width: 100%;
+  height: ${({ isRead }) => (isRead ? "221px" : "146px")};
   transition: height 0.3s ease-in-out;
 `;
 
-const EnvelopeImage = styled.img<{ isClicked: boolean }>`
-  width: 100%;
-  height: ${({ isClicked }) => (isClicked ? "221px" : "146px")};
-  object-fit: cover;
-  transition: all 0.3s ease-in-out;
-`;
-
-const SaveIcon = styled.img<{ isClicked: boolean }>`
+const SaveIcon = styled.img<{ isRead: boolean }>`
   position: absolute;
-  top: ${({ isClicked }) => (isClicked ? "-3px" : "30px")}; 
-  right: 20px; 
+  top: ${({ isRead }) => (isRead ? "-2px" : "30px")};
+  right: 10px;
   width: 20px;
   height: 30px;
   cursor: pointer;
-  z-index: 1;
-  transition: top 0.3s ease-in-out, right 0.3s ease-in-out; 
+  z-index: 2;
 `;
 
-
-const FrameImage = styled.img`
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  width: 125px;
-  height: 110px;
-  z-index: 2;
+const EnvelopeImage = styled.img<{ isRead: boolean }>`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
 `;
 
 const TextContainer = styled.div`
@@ -132,4 +106,12 @@ const DateText = styled.p`
   font-size: 10px;
   color: #000000;
   margin: 0;
+`;
+const FrameImage = styled.img`
+  position: absolute;
+  bottom: 5px; /* 봉투 하단에서 5px */
+  right: 5px; /* 봉투 오른쪽에서 5px */
+  width: 125px; /* Frame 이미지 너비 */
+  height: 110px; /* Frame 이미지 높이 */
+  z-index: 2; /* 다른 요소 위에 표시되도록 설정 */
 `;

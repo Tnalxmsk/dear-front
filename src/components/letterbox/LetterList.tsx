@@ -7,6 +7,7 @@ interface LetterListProps {
     title: string;
     sender: string;
     date: string;
+    isRead: boolean; // 읽음 여부 추가
   }>;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
@@ -26,6 +27,7 @@ const LetterList = ({ letters, onClick, onSave, savedLetters }: LetterListProps)
           onClick={() => onClick(letter.id)}
           onSave={onSave}
           isSaved={savedLetters.includes(letter.id)}
+          isRead={letter.isRead} // 읽음 여부 전달
         />
       ))}
     </EnvelopeFlex>
@@ -49,4 +51,4 @@ const EnvelopeFlex = styled.div`
   box-sizing: border-box;
   overflow: visible;
   min-height: 740px;
-;`
+`;
