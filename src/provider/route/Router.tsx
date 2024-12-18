@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router';
 import HomePage from '../../pages/home/HomePage.tsx';
-import WritePage from '../../pages/WritePage.tsx';
+import WritePage from '../../pages/write/WritePage.tsx';
 import BoxPage from '../../pages/BoxPage.tsx';
 import RootLayout from '../../layout/RootLayout.tsx';
 import MailboxPage from '../../pages/LetterboxPage.tsx';
 import LetterDetail from '../../pages/LetterDetail.tsx';
-import LayoutSelectPage from '../../pages/home/LayoutSelectPage.tsx';
+import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -17,8 +17,8 @@ export const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: '/layout-select',
-        element: <LayoutSelectPage />,
+        path: '/letter-create',
+        element: <LetterCreatePage />,
       },
       {
         path: '/write',
