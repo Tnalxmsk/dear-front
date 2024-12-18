@@ -1,12 +1,10 @@
 import Card from './Card.tsx';
 import * as S from './CardWidget.styles.ts';
-import { useNavigate } from 'react-router-dom';
 
 const CardWidget = () => {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate('/layout-select');
   };
   return (
     <S.Container>
