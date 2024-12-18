@@ -1,49 +1,135 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import styled from "styled-components";
 
 interface EnvelopeProps {
+  id: number;
   title: string;
+  sender: string;
+  date: string;
+  onClick: (id: number) => void;
+  onSave: (id: number) => void;
+  isSaved: boolean;
 }
 
-const Envelope = ({ title }: EnvelopeProps) => {
-  const navigate = useNavigate(); 
+const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved }: EnvelopeProps) => {
+  const [isClicked, setIsClicked] = useState(false);
+  const [isSecondClick, setIsSecondClick] = useState(false); 
 
-  const handleClick = () => {
-    navigate(`/letterbox/${title}`); 
+  const handleEnvelopeClick = () => {
+    if (!isClicked) {
+      setIsClicked(true); 
+    } else {
+      setIsSecondClick(true);
+    }
   };
 
+  const handleSaveClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onSave(id);
+  };
+
+  if (isSecondClick) {
+    setTimeout(() => {
+      onClick(id); 
+      setIsSecondClick(false); 
+    }, 0);
+  }
+
   return (
-    <EnvelopeContainer onClick={handleClick}> 
-      <img src="/images/envelope.png" alt="����" />
-      <p>{`[${title}]`}</p>
-    </EnvelopeContainer>
+    <EnvelopeWrapper>
+      <EnvelopeContainer onClick={handleEnvelopeClick} isClicked={isClicked}>
+        <EnvelopeImage
+          src={isClicked ? "/images/clickLetter.png" : "/images/envelope.png"}
+          alt="편지 봉투"
+          isClicked={isClicked}
+        />
+        {isClicked && <FrameImage src="/images/Frame.png" alt="Frame" />}
+      </EnvelopeContainer>
+      <SaveIcon
+        src={isSaved ? "/images/saved2.png" : "/images/saved.png"}
+        alt="즐겨찾기 아이콘"
+        onClick={handleSaveClick}
+        isClicked={isClicked}
+      />
+      <TextContainer>
+        <SenderText>
+          From. {sender} <TitleText>[ {title} ]</TitleText>
+        </SenderText>
+        <DateText>{date}</DateText>
+      </TextContainer>
+    </EnvelopeWrapper>
   );
 };
 
 export default Envelope;
 
-const EnvelopeContainer = styled.div`
-  width: 12.782rem;
-  height: 7.8125rem;
-  text-align: center;
-  margin-bottom: 8.8125rem; 
-  margin-left: 11.9375rem;
-  margin-top: 0;
-  row-gap: 5rem; 
-  column-gap: 6.25rem; 
+const EnvelopeWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 212px;
+  height: 221px; 
+  margin: 0 auto;
+  position: relative;
+  overflow: visible; 
+`;
+
+const EnvelopeContainer = styled.div<{ isClicked: boolean }>`
+  position: relative;
+  width: 212px;
+  height: ${({ isClicked }) => (isClicked ? "221px" : "146px")};
+  transition: height 0.3s ease-in-out;
+`;
+
+const EnvelopeImage = styled.img<{ isClicked: boolean }>`
+  width: 100%;
+  height: ${({ isClicked }) => (isClicked ? "221px" : "146px")};
+  object-fit: cover;
+  transition: all 0.3s ease-in-out;
+`;
+
+const SaveIcon = styled.img<{ isClicked: boolean }>`
+  position: absolute;
+  top: ${({ isClicked }) => (isClicked ? "-3px" : "30px")}; 
+  right: 20px; 
+  width: 20px;
+  height: 30px;
   cursor: pointer;
+  z-index: 1;
+  transition: top 0.3s ease-in-out, right 0.3s ease-in-out; 
+`;
 
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+const FrameImage = styled.img`
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  width: 125px;
+  height: 110px;
+  z-index: 2;
+`;
 
-  p {
-    margin-top: 1rem;
-    font-size: 1rem;
-    color: #000000;
-    font-weight: bold;
-  }
+const TextContainer = styled.div`
+  text-align: center;
+  margin-top: 10px;
+`;
+
+const SenderText = styled.p`
+  margin: 5px 0;
+  color: #000;
+  font-size: 12px;
+  font-weight: bold;
+`;
+
+const TitleText = styled.span`
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+`;
+
+const DateText = styled.p`
+  font-size: 10px;
+  color: #000000;
+  margin: 0;
 `;
