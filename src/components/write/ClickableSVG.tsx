@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const ClickableSVG = () => {
+interface ClickableSVGProps {
+  width: string;
+  height: string;
+}
+
+const ClickableSVG = ({ width, height }: ClickableSVGProps) => {
   const [isActive, setIsActive] = useState(false);
 
   // 클릭 핸들러
@@ -12,7 +17,7 @@ const ClickableSVG = () => {
       onClick={toggleColor}
       $fillColor={isActive ? '#666666' : '#D7D7D7'}
     >
-      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fillRule="evenodd"
           clipRule="evenodd"
