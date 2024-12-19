@@ -25,7 +25,7 @@ export default Pagination;
 const PageWrapper = styled.div`
   position: absolute;
   left: 50%;
-  bottom: 0rem; /* 20px 아래로 이동 */
+  bottom: 4rem; 
   transform: translateX(-50%);
   width: 6.4375rem;
   height: 1.9375rem;
