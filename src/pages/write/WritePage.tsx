@@ -1,111 +1,84 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import NavigationBar from '../components/write/NavigationBar';
-import NavigationControls from '../components/write/NavigationControls';
-import LetterHeader from '../components/write/LetterHeader';
-import QuoteSection from '../components/write/QuoteSection';
-import ImageUploadSection from '../components/write/ImageUploadSection';
-import EditableContentArea from '../components/write/EditableContentArea';
-import Footer from '../components/write/Footer';
-import RandomQuote from '../components/write/RandomQuote';
-import Modal from '../components/write/modal/Modal';
+import { useNavigate } from 'react-router-dom';
+import LetterHeader from '../../components/write/LetterHeader';
+import EditableContentArea from '../../components/write/EditableContentArea';
+import Footer from '../../components/write/Footer';
+import ImageUploadSection from '../../components/write/ImageUploadSection';
 
 const WritePage: React.FC = () => {
-    const [step, setStep] = useState<number>(1);
+    const navigate = useNavigate();
     const [recipient, setRecipient] = useState<string | null>('Recipient Name');
     const [imageUploaded, setImageUploaded] = useState<boolean>(false);
-    const [imageDescription, setImageDescription] = useState<string>('');
+    const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
     const [isPublic, setIsPublic] = useState<boolean>(false);
-    const [isSelfWriting, setIsSelfWriting] = useState<boolean>(false);
-    const [isRegistered, setIsRegistered] = useState<boolean>(true);
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal visibility
-    const [modalMessage, setModalMessage] = useState<string>(''); // Dynamic modal message
-    const [modalButtonText, setModalButtonText] = useState<string>(''); // Dynamic modal button text
 
-    const handleImageUpload = () => {
-        setImageUploaded(true);
+    const handleInsertImage = (imageUrl: string) => {
+        const editableArea = document.querySelector('[contenteditable="true"]');
+        if (editableArea) {
+            const img = document.createElement('img');
+            img.src = imageUrl;
+            img.alt = 'Uploaded Image';
+            img.style.maxWidth = '80%';
+            img.style.margin = '10px auto';
+            img.style.display = 'block';
+            editableArea.appendChild(img);
+            setUploadedImageUrl(imageUrl); // 업로드된 이미지 URL 저장
+            setImageUploaded(true); // 이미지 업로드 상태를 true로 설정
+        }
     };
 
-    const handleNextStep = () => {
-        if (step === 3 && !imageUploaded) {
-            setModalMessage('이미지를 넣어야 편지 작성이 완료됩니다!');
-            setModalButtonText('이미지 업로드');
-            setIsModalOpen(true);
-            return;
+    const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                if (event.target?.result) {
+                    handleInsertImage(event.target.result as string);
+                }
+            };
+            reader.readAsDataURL(file);
         }
-        if (step < 5) setStep(step + 1);
     };
 
     const handleComplete = () => {
         if (!imageUploaded) {
-            setModalMessage('이미지를 넣어야 편지 작성이 완료됩니다!');
-            setModalButtonText('이미지 업로드');
-            setIsModalOpen(true);
+            alert('이미지를 넣어야 편지 작성이 완료됩니다!');
         } else {
-            setModalMessage('편지가 발송되었습니다.\n보낸 편지는 우편함에서 확인 가능합니다.');
-            setModalButtonText('우편함 바로가기');
-            setIsModalOpen(true);
-        }
-    };
-
-    const handleModalButtonClick = () => {
-        if (!imageUploaded) {
-            // Handle image upload action
-            setIsModalOpen(false);
-        } else {
-            // Redirect to mailbox
-            alert('우편함으로 이동합니다!');
-            setIsModalOpen(false);
+            navigate('/sealing-wax');
         }
     };
 
     return (
         <WritePageContainer>
-            <NavigationBar onLogoClick={() => alert('메인 페이지로 이동')} onMenuClick={() => alert('사용자 프로필 출력')} />
-            <NavigationControls
-                step={step}
-                onPrevious={() => setStep((prev) => Math.max(prev - 1, 1))}
-                onNext={handleNextStep}
-                isNextDisabled={step === 5}
-            />
-
             <LetterContainer>
                 <LetterHeader
                     recipient={recipient}
-                    isSelfWriting={isSelfWriting}
-                    isRegistered={isRegistered}
+                    isSelfWriting={false}
+                    isRegistered={true}
                 />
-
-                {step === 1 && <RandomQuote />}
-
-                {step === 3 && (
-                    <ImageUploadSection
-                        imageUploaded={imageUploaded}
-                        onUpload={handleImageUpload}
-                        imageDescription={imageDescription}
-                        onDescriptionChange={setImageDescription}
-                    />
-                )}
-
-                <EditableContentArea />
+                <br/>
+                <ContentSection>
+                    <EditableContentArea />
+                    {/* 업로드된 이미지가 없을 때만 ImageUploadSection 표시 */}
+                    {!imageUploaded && (
+                        <ImageUploadSection onInsertImage={handleInsertImage} />
+                    )}
+                    {/* 업로드된 이미지가 있으면 이미지를 표시 */}
+                    {uploadedImageUrl && <UploadedImage src={uploadedImageUrl} alt="Uploaded" />}
+                    <EditableContentArea />
+                </ContentSection>
 
                 <Footer
-                    senderName="작성자"
+                    senderName="Kai"
                     isPublic={isPublic}
                     onPublicChange={setIsPublic}
                 />
             </LetterContainer>
 
-            <CompleteButton onClick={handleComplete}>작성 완료</CompleteButton>
-
-            {/* Modal */}
-            <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                message={modalMessage}
-                buttonText={modalButtonText}
-                onButtonClick={handleModalButtonClick}
-            />
+            <CompleteButtonWrapper>
+                <CompleteButton onClick={handleComplete} />
+            </CompleteButtonWrapper>
         </WritePageContainer>
     );
 };
@@ -115,36 +88,58 @@ export default WritePage;
 const WritePageContainer = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    min-height: 100vh; /* 최소 높이를 설정 */
+    width: 100%;
     background: url('/images/BG3.png') no-repeat center center;
     background-size: cover;
-    color: #000;
+    overflow-y: auto; /* 내용이 길어지면 스크롤 가능 */
+    padding: 2rem 0;
 `;
 
 const LetterContainer = styled.div`
-    width: 800px;
-    height: 1000px;
-    background: url('/images/Letter paper=2.png') no-repeat center center;
+    width: 70%;
+    max-width: 800px;
+    background: url('/images/Letter paper=2.png') no-repeat center top;
     background-size: cover;
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    color: #000;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin-bottom: 2rem; /* 여백 추가 */
+`;
+
+const ContentSection = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: auto;
+    padding: 1rem;
+    background: transparent; /* 배경 투명 */
+    border: 1px dashed #ccc; /* 가이드 라인 */
+    border-radius: 8px;
+`;
+
+const CompleteButtonWrapper = styled.div`
+    position: relative;
+    display: inline-block;
 `;
 
 const CompleteButton = styled.button`
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: #fff;
+    width: 100px; /* 버튼 너비 */
+    height: 100px; /* 버튼 높이 */
+    background: url('/images/completebutton/Property 1=Action.png');
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    font-size: 1rem;
+`;
 
-    &:hover {
-        background-color: #0056b3;
-    }
+const UploadedImage = styled.img`
+    max-width: 100%;
+    margin: 10px auto;
+    display: block;
+    border-radius: 8px;
 `;

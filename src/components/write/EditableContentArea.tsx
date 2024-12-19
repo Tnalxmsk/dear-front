@@ -1,9 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 
-// 취소선이 생긴 글 바로 옆에 글을 작성하면 
-// 취소선이 생긴 글의 상태가 훼손됨.
-
 const EditableContentArea: React.FC = () => {
     const [isPlaceholderVisible, setIsPlaceholderVisible] = useState(true);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -28,7 +25,8 @@ const EditableContentArea: React.FC = () => {
     };
 
     const handleInput = () => {
-        const content = contentRef.current?.textContent?.trim();
+        if (!contentRef.current) return; // Ensure contentRef.current is not null
+        const content = contentRef.current.textContent?.trim();
         if (content) {
             setIsPlaceholderVisible(false);
         } else {
@@ -76,7 +74,9 @@ const EditableContentArea: React.FC = () => {
     const handleBlur = () => {
         if (!contentRef.current?.textContent?.trim()) {
             setIsPlaceholderVisible(true); // Show placeholder if no text is entered
-            contentRef.current.textContent = '여기에 내용을 입력하세요...';
+            if (contentRef.current) {
+                contentRef.current.textContent = '여기에 내용을 입력하세요...';
+            }
         }
     };
 
@@ -104,7 +104,7 @@ const ContentArea = styled.div`
     padding: 1rem;
     outline: none;
     overflow-y: auto;
-    background-color: #f9f9f9;
+    background-color: transparent; /* 배경 투명 */
     color: #000;
     user-select: text; /* Allow text selection for strikethrough */
     cursor: text;

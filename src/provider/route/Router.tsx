@@ -6,6 +6,7 @@ import RootLayout from '../../layout/RootLayout.tsx';
 import LetterDetail from '../../pages/LetterDetail.tsx';
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
 import LetterboxPage from '../../pages/LetterboxPage.tsx';
+import SealingWax from '../../pages/write/SealingWax.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: 'letterbox',
         element: <LetterboxPage />,
+      },
+      {
+        path: 'sealing-wax',
+        element: <SealingWax />,
       }
     ],
   },
