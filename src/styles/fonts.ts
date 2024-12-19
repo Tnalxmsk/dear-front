@@ -14,5 +14,5 @@ export const fonts: FontsTypes = {
   heading_regular_32px: createFontStyle('RIDIBatang', 400, 32, 43),
   heading_regular_22px: createFontStyle('RIDIBatang', 400, 22, 31),
   paragraph_regular_14px: createFontStyle('RIDIBatang', 400, 14, 20),
-  small_text_regular_14px: createFontStyle('RIDIBatang', 400, 12, 14),
+  small_text_regular_12px: createFontStyle('RIDIBatang', 400, 12, 14),
 };
