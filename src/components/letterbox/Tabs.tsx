@@ -38,6 +38,13 @@ const TabsContainer = styled.div`
   margin-left: calc((100% - 1280px) / 2);
   margin-top: 35px;
   height: 51px;
+
+  @media (max-width: 768px) {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-left: 0;
+  }
 `;
 
 const TabButton = styled.button<{ active?: boolean }>`
@@ -50,13 +57,15 @@ const TabButton = styled.button<{ active?: boolean }>`
   color: ${({ active }) => (active ? "#fff" : "#333")};
   background: ${({ active }) => (active ? "#333" : "#fff")};
   border-radius: 5px 20px 0 0;
-
   box-shadow: 4px -2px 10px rgba(0, 0, 0, 0.15);
 
   &:hover {
     background: #b3b3b3;
     color: #fff;
-    box-shadow: 4px -2px 10px rgba(0, 0, 0, 0.15);
   }
-}`;
 
+  @media (max-width: 768px) {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+`;
