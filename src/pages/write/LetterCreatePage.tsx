@@ -4,11 +4,14 @@ import StatusBar from '../../components/write/StatusBar.tsx';
 import { useNavigate } from 'react-router-dom';
 import { PaperType } from '../../types/write/write.ts';
 import Letter from '../../components/write/Letter.tsx';
+import { getStepTitle } from '../../utils/getStepTitle.ts';
+import { FontType } from '../../types/write/font.ts';
+import Font from '../../components/write/Font.tsx';
 
 const LetterCreatePage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const title = '편지지 선택';
+  const title = getStepTitle(step);
 
   const handleBack = () => {
     if (step === 1) {
@@ -39,7 +42,13 @@ const LetterCreatePage = () => {
           ))}
         </PaperListContainer>
       ) : null}
-      {step === 2 ? <div></div> : null}
+      {step === 2 ? (
+        <FontListContainer>
+          {Object.values(FontType).map((type) => (
+            <Font key={type} type={type} />
+          ))}
+        </FontListContainer>
+      ) : null}
       {step === 3 ? <div></div> : null}
       {step === 4 ? <div></div> : null}
       {step === 5 ? <div></div> : null}
@@ -90,4 +99,13 @@ const PaperListContainer = styled.div`
   height: 70vh;
   gap: 20px;
   padding: 0 30px;
+`;
+
+const FontListContainer = styled.div`
+  margin-top: 40px;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px
+  
 `
