@@ -6,15 +6,25 @@ interface LetterListProps {
     id: number;
     title: string;
     sender: string;
+    recipient: string;
     date: string;
-    isRead: boolean; // 읽음 여부 추가
+    isRead: boolean;
   }>;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
   savedLetters: number[];
+  activeTab: string; 
+  nickname: string; 
 }
 
-const LetterList = ({ letters, onClick, onSave, savedLetters }: LetterListProps) => {
+const LetterList = ({
+  letters,
+  onClick,
+  onSave,
+  savedLetters,
+  activeTab,
+  nickname,
+}: LetterListProps) => {
   return (
     <EnvelopeFlex>
       {letters.map((letter) => (
@@ -23,11 +33,14 @@ const LetterList = ({ letters, onClick, onSave, savedLetters }: LetterListProps)
           id={letter.id}
           title={letter.title}
           sender={letter.sender}
+          recipient={letter.recipient}
           date={letter.date}
-          onClick={() => onClick(letter.id)}
+          onClick={onClick}
           onSave={onSave}
           isSaved={savedLetters.includes(letter.id)}
-          isRead={letter.isRead} // 읽음 여부 전달
+          isRead={letter.isRead}
+          activeTab={activeTab}
+          nickname={nickname}
         />
       ))}
     </EnvelopeFlex>
@@ -39,8 +52,8 @@ export default LetterList;
 const EnvelopeFlex = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 50px 20px;
-  justify-content: flex-start;
+  gap: 50px 20px; 
+  justify-content: center; 
   width: 100%;
   max-width: 1280px;
   background: white;

@@ -4,14 +4,29 @@ interface EnvelopeProps {
   id: number;
   title: string;
   sender: string;
+  recipient: string;
   date: string;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
   isSaved: boolean;
   isRead: boolean;
+  activeTab: string;
+  nickname: string;
 }
 
-const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved, isRead }: EnvelopeProps) => {
+const Envelope = ({
+  id,
+  title,
+  sender,
+  recipient,
+  date,
+  onClick,
+  onSave,
+  isSaved,
+  isRead,
+  activeTab,
+  nickname,
+}: EnvelopeProps) => {
   const handleEnvelopeClick = () => {
     onClick(id);
   };
@@ -20,6 +35,17 @@ const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved, isRead }:
     e.stopPropagation();
     onSave(id);
   };
+
+  const displayText =
+    (activeTab === "received" && sender !== recipient)
+      ? `From. ${sender}` 
+      : (activeTab === "sent" && sender !== recipient)
+      ? `Dear. ${recipient}`
+      : sender === nickname && recipient === nickname
+      ? ""
+      : sender === nickname
+      ? `Dear. ${recipient}`
+      : `From. ${sender}`;
 
   return (
     <EnvelopeWrapper>
@@ -38,9 +64,9 @@ const Envelope = ({ id, title, sender, date, onClick, onSave, isSaved, isRead }:
         isRead={isRead}
       />
       <TextContainer>
-        <SenderText>
-          From. {sender} <TitleText>[ {title} ]</TitleText>
-        </SenderText>
+        <CombinedText>
+          <span>{displayText}</span> <TitleText>[ {title} ]</TitleText>
+        </CombinedText>
         <DateText>{date}</DateText>
       </TextContainer>
     </EnvelopeWrapper>
@@ -56,9 +82,11 @@ const EnvelopeWrapper = styled.div`
   justify-content: flex-end;
   width: 212px;
   height: 221px;
-  margin: 0 auto;
+  margin: 30px auto 0; 
   position: relative;
+  cursor: pointer;
 `;
+
 
 const EnvelopeContainer = styled.div<{ isRead: boolean }>`
   position: relative;
@@ -69,7 +97,7 @@ const EnvelopeContainer = styled.div<{ isRead: boolean }>`
 
 const SaveIcon = styled.img<{ isRead: boolean }>`
   position: absolute;
-  top: ${({ isRead }) => (isRead ? "-2px" : "30px")};
+  top: ${({ isRead }) => (isRead ? "0px" : "35px")};
   right: 10px;
   width: 20px;
   height: 30px;
@@ -87,19 +115,20 @@ const EnvelopeImage = styled.img<{ isRead: boolean }>`
 const TextContainer = styled.div`
   text-align: center;
   margin-top: 10px;
+  line-height: 1.4;
 `;
 
-const SenderText = styled.p`
-  margin: 5px 0;
-  color: #000;
+const CombinedText = styled.div`
   font-size: 12px;
-  font-weight: bold;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 `;
 
 const TitleText = styled.span`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
-  color: #000;
 `;
 
 const DateText = styled.p`
@@ -107,11 +136,12 @@ const DateText = styled.p`
   color: #000000;
   margin: 0;
 `;
+
 const FrameImage = styled.img`
   position: absolute;
-  bottom: 5px; /* 봉투 하단에서 5px */
-  right: 5px; /* 봉투 오른쪽에서 5px */
-  width: 125px; /* Frame 이미지 너비 */
-  height: 110px; /* Frame 이미지 높이 */
-  z-index: 2; /* 다른 요소 위에 표시되도록 설정 */
+  bottom: 5px;
+  right: 5px;
+  width: 125px;
+  height: 110px;
+  z-index: 2;
 `;
