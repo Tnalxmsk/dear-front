@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { lettersData } from "../../../mock/lettersData";
-import Header from "../../components/common/Header";
 import Tabs from "../../components/letterbox/Tabs";
 import LetterList from "../../components/letterbox/LetterList";
 import Pagination from "../../components/letterbox/Pagination";
@@ -96,7 +95,6 @@ const LetterboxPage = () => {
 
   return (
     <S.Container>
-      <Header />
       <S.Inner>
         <S.TitleContainer>
           <S.Circle />

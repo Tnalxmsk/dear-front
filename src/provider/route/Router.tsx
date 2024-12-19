@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 import HomePage from '../../pages/home/HomePage.tsx';
 import WritePage from '../../pages/write/WritePage.tsx';
-import BoxPage from '../../pages/BoxPage.tsx';
 import RootLayout from '../../layout/RootLayout.tsx';
 import LetterboxPage from '../../pages/letterbox/LetterboxPage.tsx';
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
@@ -22,10 +21,6 @@ export const router = createBrowserRouter([
       {
         path: '/write',
         element: <WritePage />,
-      },
-      {
-        path: 'box',
-        element: <BoxPage />,
       },
       {
         path: 'letterbox',

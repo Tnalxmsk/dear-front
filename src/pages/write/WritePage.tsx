@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import NavigationBar from '../../components/write/NavigationBar.tsx';
 import NavigationControls from '../../components/write/NavigationControls.tsx';
 import LetterHeader from '../../components/write/LetterHeader.tsx';
 import RandomQuote from '../../components/write/RandomQuote.tsx';
@@ -61,7 +60,6 @@ const WritePage: React.FC = () => {
 
   return (
     <WritePageContainer>
-      <NavigationBar onLogoClick={() => alert('메인 페이지로 이동')} onMenuClick={() => alert('사용자 프로필 출력')} />
       <NavigationControls
         step={step}
         onPrevious={() => setStep((prev) => Math.max(prev - 1, 1))}
