@@ -4,7 +4,6 @@ import WritePage from '../../pages/write/WritePage.tsx';
 import BoxPage from '../../pages/BoxPage.tsx';
 import RootLayout from '../../layout/RootLayout.tsx';
 import LetterboxPage from '../../pages/letterbox/LetterboxPage.tsx';
-import LayoutSelectPage from '../../pages/home/HomePage.tsx'
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
 
 export const router = createBrowserRouter([
