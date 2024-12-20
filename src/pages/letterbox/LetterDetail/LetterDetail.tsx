@@ -20,9 +20,7 @@ interface LetterDetailProps {
 const LetterDetail = ({ id, onPrev, onNext, onSaveToggle, isSaved }: LetterDetailProps) => {
   const [isPublic, setIsPublic] = useState(false);
 
-  const toggleVisibility = () => {
-    setIsPublic((prev) => !prev);
-  };
+  const toggleVisibility = () => setIsPublic((prev) => !prev);
 
   const letter = lettersData.find((item) => item.id === id);
 
@@ -41,6 +39,8 @@ const LetterDetail = ({ id, onPrev, onNext, onSaveToggle, isSaved }: LetterDetai
     quote,
     quoteSource,
     image,
+    caption,
+    date,
   } = letter;
 
   const backgroundImage = `/images/${getPaperFileName(paperType)}`;
@@ -62,7 +62,7 @@ const LetterDetail = ({ id, onPrev, onNext, onSaveToggle, isSaved }: LetterDetai
       <QuoteSection quote={quote} quoteSource={quoteSource} />
 
       {/* 편지 본문 */}
-      <ContentSection content={content} image={image} title={title} />
+      <ContentSection content={content} image={image} caption={caption} date={date} />
 
       {/* 수신자 정보 */}
       <RecipientInfo recipient={recipient} recipientEmail={recipientEmail} />
