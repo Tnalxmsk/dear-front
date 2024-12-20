@@ -7,36 +7,6 @@ declare global {
   }
 }
 
-const ButtonContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  height: 50px;
-  background-color: #ffffff;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s;
-
-  &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-const Logo = styled.span`
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #03c75a;
-  margin-right: 8px;
-`;
-
-const Text = styled.span`
-  font-size: 1rem;
-  color: #333;
-`;
-
 const NaverButton: React.FC = () => {
   useEffect(() => {
     if (window.naver) {
@@ -75,10 +45,38 @@ const NaverButton: React.FC = () => {
 
   return (
     <ButtonContainer onClick={handleNaverLogin}>
-      <Logo>N</Logo>
+      <Logo src='/src/assets/logo-naver.svg'/>
       <Text>네이버 로그인</Text>
+      <div></div>
     </ButtonContainer>
   );
 };
 
 export default NaverButton;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 400px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 15px 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  &:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+`;
+
+const Logo = styled.img`
+  width: 24px;
+  height: 24px;
+`;
+
+const Text = styled.span`
+  font: ${({ theme }) => theme.fonts.heading_regular_22px};
+  color: ${({ theme }) => theme.colors.black};
+`;
