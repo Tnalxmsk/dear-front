@@ -30,42 +30,42 @@ const Tabs = ({ activeTab, onTabClick }: TabsProps) => {
 export default Tabs;
 
 const TabsContainer = styled.div`
-  padding: 0px 10px;
+  padding: 0rem 0.625rem;
   display: flex;
-  gap: 6px;
-  margin-bottom: -35px;
+  gap: 0.375rem;
+  margin-bottom: -2.1875rem;
   align-self: flex-start;
-  margin-left: calc((100% - 1280px) / 2);
-  margin-top: 35px;
-  height: 51px;
+  margin-left: calc((100% - 80rem) / 2);
+  margin-top: 2.1875rem;
+  height: 3.1875rem;
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 0.625rem;
     justify-content: center;
     margin-left: 0;
   }
 `;
 
 const TabButton = styled.button<{ active?: boolean }>`
-  padding: 10px 20px;
-  font-size: 22px;
+  padding: 0.625rem 1.25rem;
+  font-size: 1.375rem;
   font-weight: bold;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
   color: ${({ active }) => (active ? "#fff" : "#333")};
   background: ${({ active }) => (active ? "#333" : "#fff")};
-  border-radius: 5px 20px 0 0;
-  box-shadow: 4px -2px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 0.3125rem 1.25rem 0 0;
+  box-shadow: 0.25rem -0.125rem 0.625rem rgba(0, 0, 0, 0.15);
 
   &:hover {
     background: #b3b3b3;
     color: #fff;
   }
 
-  @media (max-width: 768px) {
-    font-size: 16px;
-    padding: 8px 16px;
+  @media (max-width: 48rem) {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
   }
 `;
