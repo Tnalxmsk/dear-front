@@ -80,27 +80,26 @@ const EnvelopeWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  width: 212px;
-  height: 221px;
-  margin: 30px auto 0; 
+  width: 13.25rem;
+  height: 13.8125rem;
+  margin: 3.125rem auto 0;
   position: relative;
   cursor: pointer;
 `;
 
-
 const EnvelopeContainer = styled.div<{ isRead: boolean }>`
   position: relative;
   width: 100%;
-  height: ${({ isRead }) => (isRead ? "221px" : "146px")};
+  height: ${({ isRead }) => (isRead ? "13.8125rem" : "9.125rem")};
   transition: height 0.3s ease-in-out;
 `;
 
 const SaveIcon = styled.img<{ isRead: boolean }>`
   position: absolute;
-  top: ${({ isRead }) => (isRead ? "0px" : "35px")};
-  right: 10px;
-  width: 20px;
-  height: 30px;
+  top: ${({ isRead }) => (isRead ? "0rem" : "2.1875rem")};
+  right: 0.625rem;
+  width: 1.25rem;
+  height: 1.875rem;
   cursor: pointer;
   z-index: 2;
 `;
@@ -114,34 +113,35 @@ const EnvelopeImage = styled.img<{ isRead: boolean }>`
 
 const TextContainer = styled.div`
   text-align: center;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   line-height: 1.4;
 `;
 
 const CombinedText = styled.div`
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #000;
   display: flex;
   justify-content: center;
-  gap: 5px;
+  gap: 0.3125rem;
 `;
 
 const TitleText = styled.span`
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: bold;
 `;
 
 const DateText = styled.p`
-  font-size: 10px;
+  font-size: 0.625rem;
   color: #000000;
   margin: 0;
 `;
 
 const FrameImage = styled.img`
   position: absolute;
-  bottom: 5px;
-  right: 5px;
-  width: 125px;
-  height: 110px;
+  bottom: 0.3125rem;
+  right: 0.3125rem;
+  width: 7.8125rem;
+  height: 6.875rem;
   z-index: 2;
 `;
+

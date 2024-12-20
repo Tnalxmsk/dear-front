@@ -50,18 +50,19 @@ const LetterList = ({
 export default LetterList;
 
 const EnvelopeFlex = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 50px 20px; 
-  justify-content: center; 
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 3.125rem 1.25rem;
+  justify-content: center;
   width: 100%;
-  max-width: 1280px;
+  max-width: 80rem;
   background: white;
-  padding: 70px 50px;
-  margin: 35px 0;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 4.375rem 3.125rem;
+  margin: 2.1875rem 0;
+  border-radius: 0.3125rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  overflow: visible;
-  min-height: 740px;
+  max-height: 46.25rem;
+  min-height: 46.25rem;
 `;
+

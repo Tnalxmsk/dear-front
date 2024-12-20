@@ -4,33 +4,30 @@ const DetailContainer = styled.div<{ backgroundImage: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
-  width: 864px;
-  padding: 64px;
-  gap: 20px;
-  border-radius: 10px;
+  justify-content: center;
+  width: 54rem;
+  padding: 4rem;
+  gap: 1.25rem;
+  border-radius: 0.625rem;
   background: url(${(props) => props.backgroundImage}) no-repeat center;
   background-size: cover;
   position: relative;
   box-sizing: border-box;
-  margin-bottom: 200px;
-
+  margin-bottom: 12.5rem;
   height: auto;
 `;
-
 
 const SenderInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 64px;
-  margin-left: -480px;
+  gap: 0.625rem;
+  margin-top: 4rem;
+  margin-left: -30rem;
 `;
 
-
 const ProfileImage = styled.div`
-  width: 28px; 
-  height: 28px; 
+  width: 1.75rem;
+  height: 1.75rem;
   background-color: #ccc;
   border-radius: 50%;
 `;
@@ -53,20 +50,20 @@ const SenderEmail = styled.span`
 `;
 
 const LetterTitle = styled.h1`
-  margin-top: 40px;
+  margin-top: 2.5rem;
   font-size: 2.4rem;
   font-weight: bold;
   text-align: center;
-  
   color: #000000;
   border-bottom: 1px solid #000000;
-  padding-bottom: 30px;
+  padding-bottom: 1.875rem;
   width: 30%;
 `;
+
 const QuoteContainer = styled.div`
   text-align: center;
-  margin: 20px 0;
-  width:461px;
+  margin: 1.25rem 0;
+  width: 28.8125rem;
   height: auto;
 `;
 
@@ -74,7 +71,7 @@ const QuoteText = styled.p`
   font-size: 1.2rem;
   font-style: italic;
   color: #555;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 `;
 
 const QuoteAuthor = styled.p`
@@ -106,54 +103,53 @@ const ImageFrame = styled.div`
 
 const Image = styled.img`
   max-width: 100%;
-  max-height: 300px;
-  border-radius: 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  max-height: 18.75rem;
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
 `;
 
 const ImageCaption = styled.div`
   font-size: 0.9rem;
   color: #666;
-  margin-top: 10px;
+  margin-top: 0.625rem;
   text-align: center;
 `;
 
 const NavigationContainer = styled.div`
   position: absolute;
-  bottom: -20px;
+  bottom: -1.25rem;
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: -30px;
+  margin-bottom: -1.875rem;
 `;
 
 const PrevButton = styled.button`
   position: absolute;
-  left: -160px;
+  left: -10rem;
   background: transparent;
   border: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   cursor: pointer;
 `;
 
 const NextButton = styled.button`
   position: absolute;
-  right: -160px;
+  right: -10rem;
   background: transparent;
   border: none;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
   cursor: pointer;
 `;
 
 const ArrowButton = styled.span`
-  width: 15px;
-  height: 20px;
+  width: 0.9375rem;
+  height: 1.25rem;
   display: inline-flex;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: bold;
   color: #000;
   align-items: center;
@@ -163,38 +159,38 @@ const ArrowButton = styled.span`
 const TextWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 `;
 
 const SenderText = styled.span`
-  font-size: 12px;
+  font-size: 0.75rem;
   color: #000;
 `;
 
 const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 0.25rem;
 `;
 
 const TitleBracket = styled.span`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: bold;
   color: #000;
 `;
 
 const TitleText = styled.span`
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: bold;
   color: #000;
 `;
 
 const SaveIcon = styled.img`
   position: absolute;
-  right: 45px;
-  top: 15px;
-  width: 40px;
-  height: 60px;
+  right: 2.8125rem;
+  top: 0.9375rem;
+  width: 2.5rem;
+  height: 3.75rem;
   cursor: pointer;
 `;
 
@@ -212,14 +208,12 @@ const FromSection = styled.div`
   color: #333;
 `;
 
-
 const FromInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  margin-left: 400px;
-  margin-bottom: 64px;
+  gap: 0.625rem;
+  margin-left: 25rem;
+  margin-bottom: 4rem;
 `;
 
 const FromLabel = styled.span`
@@ -232,20 +226,20 @@ const VisibilityToggleWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 20px;
+  margin-top: 1.25rem;
   width: 100%;
 `;
 
 const VisibilityToggleText = styled.span`
   font-size: 1rem;
   color: #333;
-  margin-right: 10px;
+  margin-right: 0.625rem;
 `;
 
 const VisibilityToggle = styled.div<{ isOn: boolean }>`
-  width: 70px; 
-  height: 40px; 
-  border-radius: 50px;
+  width: 4.375rem;
+  height: 2.5rem;
+  border-radius: 3.125rem;
   background-color: ${({ isOn }) => (isOn ? "#ffd700" : "#e0e0e0")};
   position: relative;
   cursor: pointer;
@@ -254,19 +248,16 @@ const VisibilityToggle = styled.div<{ isOn: boolean }>`
   &:before {
     content: "";
     position: absolute;
-    top: 5px; 
-    left: 5px;
-    width: 30px; 
-    height: 30px; 
+    top: 0.3125rem;
+    left: 0.3125rem;
+    width: 1.875rem;
+    height: 1.875rem;
     background: white;
     border-radius: 50%;
     transition: transform 0.3s;
-    transform: ${({ isOn }) => (isOn ? "translateX(30px)" : "translateX(0)")};
+    transform: ${({ isOn }) => (isOn ? "translateX(1.875rem)" : "translateX(0)")};
   }
 `;
-
-
-
 
 const Styles = {
   DetailContainer,
@@ -301,7 +292,6 @@ const Styles = {
   FromLabel,
   VisibilityToggleWrapper,
   VisibilityToggleText,
-  
 };
 
 export default Styles;

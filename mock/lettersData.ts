@@ -1,6 +1,6 @@
 export const lettersData = [
   // 받는 사람이 "콩"인 편지
-  ...Array.from({ length: 20 }, (_, i) => ({
+  ...Array.from({ length: 23 }, (_, i) => ({
     id: i + 1,
     title: `제목 ${i + 1}`,
     recipient: "콩",
