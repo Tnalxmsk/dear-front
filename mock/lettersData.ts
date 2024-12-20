@@ -26,6 +26,7 @@ export const lettersData = [
     sealColor: "red",
     image: "https://i.pinimg.com/736x/2b/53/aa/2b53aa45b761b66b554cdf52270f0be9.jpg",
     date: `2024.11.${(i % 30) + 1}`,
+    caption: `캡션입니다 안녕하세여`,
     quote: `
       받은 편지는 행복의 시작이다. 
       그 안에 담긴 말들은 시간이 지나도 우리를 미소 짓게 하며, 마음의 풍경을 따뜻하게 물들인다.
@@ -59,7 +60,8 @@ export const lettersData = [
     `,
     paperType: "크래프트",
     sealColor: "blue",
-    image: "https://via.placeholder.com/327x260",
+    caption: `짱구 사진 입니당`,
+    image: "https://i.pinimg.com/474x/bd/8c/28/bd8c2859b56b5d8ace1c1c2cfe299952.jpg",
     date: `2024.11.${(i % 30) + 1}`,
     quote: `
       보낸 편지는 마음의 전언이다. 
@@ -92,6 +94,7 @@ export const lettersData = [
     `,
     paperType: "모눈",
     sealColor: "green",
+    caption: `캡션`,
     image: "https://via.placeholder.com/327x260",
     date: `2024.11.${(i % 30) + 1}`,
     quote: `
@@ -128,6 +131,7 @@ export const lettersData = [
     sealColor: "yellow",
     image: "https://via.placeholder.com/327x260",
     date: `2024.11.${(i % 30) + 1}`,
+    caption: `캡션`,
     quote: `
       감사는 마음의 풍경을 따뜻하게 물들인다.
     `,
@@ -158,6 +162,7 @@ export const lettersData = [
     sealColor: "black",
     image: "https://via.placeholder.com/327x260",
     date: `2024.11.${(i % 30) + 1}`,
+    caption: `캡션`,
     quote: `
       축하는 행복의 공유이다.
     `,
