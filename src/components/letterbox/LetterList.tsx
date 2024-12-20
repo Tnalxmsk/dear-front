@@ -1,4 +1,4 @@
-import Envelope from "./Envelope";
+import Envelope from "./Envelope/Envelope";
 import styled from "styled-components";
 
 interface LetterListProps {
@@ -9,6 +9,7 @@ interface LetterListProps {
     recipient: string;
     date: string;
     isRead: boolean;
+    sealColor?: string; 
   }>;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
@@ -35,6 +36,7 @@ const LetterList = ({
           sender={letter.sender}
           recipient={letter.recipient}
           date={letter.date}
+          sealColor={letter.sealColor} // sealColor РќДо
           onClick={onClick}
           onSave={onSave}
           isSaved={savedLetters.includes(letter.id)}
@@ -65,4 +67,3 @@ const EnvelopeFlex = styled.div`
   max-height: 46.25rem;
   min-height: 46.25rem;
 `;
-

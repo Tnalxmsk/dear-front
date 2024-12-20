@@ -12,7 +12,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
       <PageButton
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        isDisabled={currentPage === 1} // 추가된 속성
+        isDisabled={currentPage === 1} 
       >
         {"<"}
       </PageButton>
@@ -20,7 +20,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) 
       <PageButton
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        isDisabled={currentPage === totalPages} // 추가된 속성
+        isDisabled={currentPage === totalPages} 
       >
         {">"}
       </PageButton>
@@ -48,10 +48,10 @@ const PageButton = styled.button<{ isDisabled: boolean }>`
   border: none;
   font-size: 1.2rem;
   cursor: ${({ isDisabled }) => (isDisabled ? "not-allowed" : "pointer")};
-  color: ${({ isDisabled }) => (isDisabled ? "white" : "#000")}; /* 회색으로 변경 */
+  color: ${({ isDisabled }) => (isDisabled ? "white" : "#000")}; 
 
   &:hover {
-    color: ${({ isDisabled }) => (isDisabled ? "#aaa" : "#555")}; /* 활성 상태에서 호버 */
+    color: ${({ isDisabled }) => (isDisabled ? "#aaa" : "#555")}; 
   }
 `;
 
