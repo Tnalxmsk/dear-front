@@ -20,6 +20,7 @@ const Container = styled.div`
   width: 100vw;
   height: 100vh;
   padding-top: 300px;
+  gap: 30px;
   align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
