@@ -9,13 +9,14 @@ interface LetterListProps {
     recipient: string;
     date: string;
     isRead: boolean;
-    sealColor?: string; 
+    sealColor?: string;
+    caption: string;
   }>;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
   savedLetters: number[];
-  activeTab: string; 
-  nickname: string; 
+  activeTab: string;
+  nickname: string;
 }
 
 const LetterList = ({
@@ -36,13 +37,14 @@ const LetterList = ({
           sender={letter.sender}
           recipient={letter.recipient}
           date={letter.date}
-          sealColor={letter.sealColor} // sealColor РќДо
+          sealColor={letter.sealColor}
           onClick={onClick}
           onSave={onSave}
           isSaved={savedLetters.includes(letter.id)}
           isRead={letter.isRead}
           activeTab={activeTab}
           nickname={nickname}
+          caption={letter.caption} 
         />
       ))}
     </EnvelopeFlex>
@@ -67,3 +69,4 @@ const EnvelopeFlex = styled.div`
   max-height: 46.25rem;
   min-height: 46.25rem;
 `;
+

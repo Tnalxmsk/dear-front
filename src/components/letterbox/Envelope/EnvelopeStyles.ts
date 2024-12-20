@@ -21,7 +21,7 @@ export const EnvelopeContainer = styled.div<{ isRead: boolean }>`
 
 export const SaveIcon = styled.img<{ isRead: boolean }>`
   position: absolute;
-  top: ${({ isRead }) => (isRead ? "0rem" : "2.1875rem")};
+  top: ${({ isRead }) => (isRead ? "-2rem" : "0.2rem")};
   right: 0.625rem;
   width: 1.25rem;
   height: 1.875rem;

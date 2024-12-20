@@ -1,35 +1,39 @@
-import React from "react";
 import S from "./LetterDetail.styles";
 
 interface ContentSectionProps {
   content: string;
   image?: string;
-  title: string;
+  caption: string;
+  date: string; // date 추가
 }
 
-const ContentSection = ({ content, image, title }: ContentSectionProps) => {
-  // 본문 내용을 문단 단위로 나누기
+const ContentSection = ({ content, image, caption, date }: ContentSectionProps) => {
+  // 본문을 문단 단위로 나누기
   const contentParts = content.split("\n\n");
+  const splitIndex = Math.floor(contentParts.length / 2);
 
-  // 이미지 삽입 위치를 하단 3/4 지점으로 설정
-  const insertionIndex = Math.floor(contentParts.length * 0.75);
+  const upperContent = contentParts.slice(0, splitIndex).join("\n\n");
+  const lowerContent = contentParts.slice(splitIndex).join("\n\n");
 
   return (
     <S.ContentContainer>
-      {contentParts.map((part, index) => (
-        <React.Fragment key={index}>
-          {/* 본문 내용 출력 */}
-          <S.ContentText>{part}</S.ContentText>
+      {/* 상단 본문 */}
+      <S.ContentText>{upperContent}</S.ContentText>
 
-          {/* 설정된 위치에 이미지 삽입 */}
-          {index === insertionIndex && image && (
-            <S.ImageFrame>
-              <S.Image src={image} alt="편지 이미지" />
-              <S.ImageCaption>{`이미지에 대한 설명, ${title}`}</S.ImageCaption>
-            </S.ImageFrame>
-          )}
-        </React.Fragment>
-      ))}
+      {/* 이미지 삽입 */}
+      {image && (
+        <S.ImageFrame>
+          <S.FrameImage src="/images/frameL.png" alt="이미지 프레임" />
+          <S.Image src={image} alt="편지 이미지" />
+          <S.ImageCaption>
+            <S.ImageCaptionText>{caption}</S.ImageCaptionText>
+            <S.ImageCaptionDate>{date}</S.ImageCaptionDate>
+          </S.ImageCaption>
+        </S.ImageFrame>
+      )}
+
+      {/* 하단 본문 */}
+      <S.ContentText>{lowerContent}</S.ContentText>
     </S.ContentContainer>
   );
 };

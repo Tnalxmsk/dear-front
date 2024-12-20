@@ -10,6 +10,7 @@ interface EnvelopeProps {
   recipient: string;
   date: string;
   sealColor?: string;
+  caption: string; 
   onClick: (id: number) => void;
   onSave: (id: number) => void;
   isSaved: boolean;
@@ -25,6 +26,7 @@ const Envelope = ({
   recipient,
   date,
   sealColor,
+  caption, 
   onClick,
   onSave,
   isSaved,
@@ -43,7 +45,7 @@ const Envelope = ({
 
   const displayText =
     (activeTab === "received" && sender !== recipient)
-      ? `From. ${sender}` 
+      ? `From. ${sender}`
       : (activeTab === "sent" && sender !== recipient)
       ? `Dear. ${recipient}`
       : sender === nickname && recipient === nickname
@@ -56,8 +58,10 @@ const Envelope = ({
     <EnvelopeWrapper>
       <EnvelopeBody
         isRead={isRead}
-        sealColor={sealColor} 
+        sealColor={sealColor}
         onClick={handleEnvelopeClick}
+  
+        
       />
       <SaveIconButton
         isSaved={isSaved}
@@ -69,6 +73,8 @@ const Envelope = ({
         title={title}
         date={date}
       />
+      {caption && <div>{caption}</div>}
+      {date && <div>{date}</div>}
     </EnvelopeWrapper>
   );
 };
