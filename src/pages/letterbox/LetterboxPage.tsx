@@ -4,7 +4,7 @@ import { lettersData } from "../../../mock/lettersData";
 import Tabs from "../../components/letterbox/Tabs";
 import LetterList from "../../components/letterbox/LetterList";
 import Pagination from "../../components/letterbox/Pagination";
-import LetterDetail from "./LetterDetail";
+import LetterDetail from "./LetterDetail/LetterDetail";
 import S from "./LetterboxPage.styles";
 
 const LetterboxPage = () => {
