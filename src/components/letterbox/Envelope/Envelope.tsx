@@ -10,13 +10,14 @@ interface EnvelopeProps {
   recipient: string;
   date: string;
   sealColor?: string;
-  caption: string; 
+  caption: string;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
   isSaved: boolean;
   isRead: boolean;
   activeTab: string;
   nickname: string;
+  image?: string; 
 }
 
 const Envelope = ({
@@ -26,13 +27,14 @@ const Envelope = ({
   recipient,
   date,
   sealColor,
-  caption, 
+  caption,
   onClick,
   onSave,
   isSaved,
   isRead,
   activeTab,
   nickname,
+  image, 
 }: EnvelopeProps) => {
   const handleEnvelopeClick = () => {
     onClick(id);
@@ -44,9 +46,9 @@ const Envelope = ({
   };
 
   const displayText =
-    (activeTab === "received" && sender !== recipient)
+    activeTab === "received" && sender !== recipient
       ? `From. ${sender}`
-      : (activeTab === "sent" && sender !== recipient)
+      : activeTab === "sent" && sender !== recipient
       ? `Dear. ${recipient}`
       : sender === nickname && recipient === nickname
       ? ""
@@ -60,19 +62,10 @@ const Envelope = ({
         isRead={isRead}
         sealColor={sealColor}
         onClick={handleEnvelopeClick}
-  
-        
+        image={image} 
       />
-      <SaveIconButton
-        isSaved={isSaved}
-        isRead={isRead}
-        onClick={handleSaveClick}
-      />
-      <EnvelopeText
-        displayText={displayText}
-        title={title}
-        date={date}
-      />
+      <SaveIconButton isSaved={isSaved} isRead={isRead} onClick={handleSaveClick} />
+      <EnvelopeText displayText={displayText} title={title} date={date} />
       {caption && <div>{caption}</div>}
       {date && <div>{date}</div>}
     </EnvelopeWrapper>

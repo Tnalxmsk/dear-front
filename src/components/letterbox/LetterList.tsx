@@ -11,6 +11,7 @@ interface LetterListProps {
     isRead: boolean;
     sealColor?: string;
     caption: string;
+    image: string;
   }>;
   onClick: (id: number) => void;
   onSave: (id: number) => void;
@@ -45,6 +46,7 @@ const LetterList = ({
           activeTab={activeTab}
           nickname={nickname}
           caption={letter.caption} 
+          image={letter.image}
         />
       ))}
     </EnvelopeFlex>

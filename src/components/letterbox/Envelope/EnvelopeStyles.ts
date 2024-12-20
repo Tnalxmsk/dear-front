@@ -36,15 +36,32 @@ export const EnvelopeImage = styled.img<{ isRead: boolean }>`
   transition: all 0.3s ease-in-out;
 `;
 
-export const FrameImage = styled.img`
+export const FrameImage = styled.div`
   position: absolute;
   bottom: 0.3125rem;
   right: 0.3125rem;
   width: 7.8125rem;
   height: 6.875rem;
   z-index: 2;
+  background: url("/images/Frame.png") no-repeat center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  
 `;
 
+export const InnerImage = styled.img`
+  position: absolute;
+  width: 6.25rem; 
+  height: 4.9rem; 
+  object-fit: cover; 
+  margin-bottom: 0.8rem;
+  margin-right: 0.2rem;
+
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.1);
+`;
 
 export const WaxSeal = styled.img`
   position: absolute;
