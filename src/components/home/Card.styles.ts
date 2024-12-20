@@ -6,9 +6,10 @@ const CardContainer = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
+  cursor: pointer;
   width: 200px;
   height: 200px;
-  border: 1px solid #fcfcfc;
+  border: 1px solid ${({ theme }) => theme.colors.black};
 `;
 
 const CardImage = styled.div`
@@ -25,7 +26,7 @@ const Title = styled.div`
   margin-bottom: 10px;
   text-align: center;
   font: ${({ theme }) => theme.fonts.heading_regular_22px};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
 `;
 
 export { CardContainer, CardImage, Title };

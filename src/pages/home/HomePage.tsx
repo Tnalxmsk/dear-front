@@ -1,11 +1,22 @@
 import styled from 'styled-components';
 import CardWidget from '../../components/home/CardWidget.tsx';
+import { useAuthStore } from '../../store/useAuthStore.ts';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const HomePage = () => {
+  const { isLoggedIn } = useAuthStore();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/auth');
+    }
+  }, []);
+
+
   return (
     <Container>
-      <Section style={{ backgroundImage: 'url("/src/assets/bg-home.png")' }}>
-      </Section>
       <Section style={{ backgroundImage: 'url("/src/assets/bg-home-bottom.png")' }}>
         <CardWidget />
       </Section>
