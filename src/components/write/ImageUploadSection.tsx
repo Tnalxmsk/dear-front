@@ -7,17 +7,20 @@ interface ImageUploadSectionProps {
 
 const ImageUploadSection: React.FC<ImageUploadSectionProps> = ({ onInsertImage }) => {
     const [dragOver, setDragOver] = useState(false);
+    const [isImageUploaded, setIsImageUploaded] = useState(false); // Prevent re-upload
 
     const handleFileUpload = (file: File) => {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const result = e.target?.result;
-            if (typeof result === 'string') {
-                onInsertImage(result);
-            }
-        };
-        reader.readAsDataURL(file);
+    if (isImageUploaded) return; // Skip if already uploaded
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const result = e.target?.result;
+        if (typeof result === 'string' && !isImageUploaded) { // Check again before calling
+            onInsertImage(result);
+            setIsImageUploaded(true); // Mark as uploaded
+        }
     };
+    reader.readAsDataURL(file);
+};
 
     const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];

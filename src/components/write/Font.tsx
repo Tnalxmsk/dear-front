@@ -17,7 +17,7 @@ const Font = ({ type }: FontProps) => {
       </Top>
       <Bottom>
         <Example $fontType={type}>{example}</Example>
-        <ClickableSVG />
+        <ClickableSVG width="40" height="40"/>
       </Bottom>
       <Divider />
     </Container>

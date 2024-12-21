@@ -15,7 +15,7 @@ const Letter = ({ type }: LetterProps) => {
         <Title>{label}</Title>
         <Description>{description}</Description>
       </Content>
-      <ClickableSVG />
+      <ClickableSVG width="40" height="40"/>
     </Container>
   );
 };

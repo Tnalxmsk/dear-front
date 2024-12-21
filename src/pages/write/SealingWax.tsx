@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Modal from '../../components/write/modal/Modal';
 
 const SealingWax: React.FC = () => {
   const [selectedWax, setSelectedWax] = useState<number | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleWaxSelect = (index: number) => {
     setSelectedWax(index);
@@ -10,18 +12,27 @@ const SealingWax: React.FC = () => {
 
   const handleSendLetter = () => {
     if (selectedWax !== null) {
-      alert('편지가 발송되었습니다! 보낸 편지는 우편함에서 확인 가능합니다.');
+      setIsModalOpen(true);
     } else {
       alert('실링왁스를 선택해주세요.');
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const goToMailbox = () => {
+    alert('우편함으로 이동합니다!');
+    closeModal();
+  };
+
   return (
     <PageContainer>
-        <StepIndicator>실링왁스 선택</StepIndicator>
-        <br/>
-    <WaxSelectionContainer>
-    <WaxDisplay>
+      <StepIndicator>실링왁스 선택</StepIndicator>
+      <br />
+      <WaxSelectionContainer>
+        <WaxDisplay>
           <WaxImage
             src={
               selectedWax !== null
@@ -53,12 +64,25 @@ const SealingWax: React.FC = () => {
             </WaxOption>
           ))}
         </WaxOptions>
-        <br/>
+        <br />
       </WaxSelectionContainer>
 
       <SendButton onClick={handleSendLetter}>
-          <img src="/images/sealingwax/sendbutton.png" alt="편지 발송 버튼" />
+        <img src="/images/sealingwax/sendbutton.png" alt="편지 발송 버튼" />
       </SendButton>
+
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        message={
+          <ModalContent>
+            <p>편지가 발송되었습니다.</p>
+            <p>보낸 편지는 우편함에서 확인 가능합니다.</p>
+          </ModalContent>
+        }
+        buttonText="우편함 바로가기"
+        onButtonClick={goToMailbox}
+      />
     </PageContainer>
   );
 };
@@ -82,7 +106,7 @@ const StepIndicator = styled.div`
 `;
 
 const WaxSelectionContainer = styled.div`
-  border-radius: 20px;  
+  border-radius: 20px;
   display: flex;
   width: 35%;
   flex-direction: column;
@@ -148,5 +172,15 @@ const SendButton = styled.button`
   & img {
     width: 50px;
     height: 50px;
+  }
+`;
+
+const ModalContent = styled.div`
+  text-align: center;
+  font-size: 1.25rem;
+  line-height: 1.5;
+
+  p {
+    margin: 0.5rem 0;
   }
 `;

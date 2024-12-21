@@ -7,6 +7,7 @@ import Letter from '../../components/write/Letter.tsx';
 import { getStepTitle } from '../../utils/getStepTitle.ts';
 import { FontType } from '../../types/write/font.ts';
 import Font from '../../components/write/Font.tsx';
+import EmailForm from '../../components/write/EmailForm.tsx';
 
 const LetterCreatePage = () => {
   const navigate = useNavigate();
@@ -49,7 +50,11 @@ const LetterCreatePage = () => {
           ))}
         </FontListContainer>
       ) : null}
-      {step === 3 ? <div></div> : null}
+      {step === 3 ? (
+        <div style={{ padding: '0 20%', marginTop: '60px'}}>
+          <EmailForm />
+        </div>
+      ) : null}
       {step === 4 ? <div></div> : null}
       {step === 5 ? <div></div> : null}
     </Container>
@@ -107,5 +112,5 @@ const FontListContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px
-  
-`
+
+`;
