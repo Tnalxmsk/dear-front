@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router';
 import HomePage from '../../pages/home/HomePage.tsx';
-import WritePage from '../../pages/write/WritePage.tsx'
+import WritePage from '../../pages/write/WritePage.tsx';
 import RootLayout from '../../layout/RootLayout.tsx';
 import LetterboxPage from '../../pages/letterbox/LetterboxPage.tsx';
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
@@ -26,13 +26,14 @@ export const router = createBrowserRouter([
         element: <WritePage />,
       },
       {
-        path: 'letterbox',
+        path: '/letterbox',
         element: <LetterboxPage />,
       },
       {
-        path: 'sealing-wax',
+        path: '/sealing-wax',
         element: <SealingWax />,
-      }
+      },
+      {
         path: '/auth',
         element: <AuthPage />,
       },
