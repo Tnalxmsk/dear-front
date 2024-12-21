@@ -1,13 +1,14 @@
-import { PAPER_TYPE_DETAILS, PaperType } from '../../types/write/write.ts';
+import { AvailablePaperType, PAPER_TYPE_DETAILS, PaperType } from '../../types/write/write.ts';
 import styled from 'styled-components';
 import ClickableSVG from './ClickableSVG.tsx';
 
 interface LetterProps {
-  type: PaperType,
+  type: AvailablePaperType,
 }
 
 const Letter = ({ type }: LetterProps) => {
-  const { label, src, description } = PAPER_TYPE_DETAILS[type];
+  const paperType = type.name as PaperType;
+  const { label, src, description } = PAPER_TYPE_DETAILS[paperType];
 
   return (
     <Container $src={src}>
