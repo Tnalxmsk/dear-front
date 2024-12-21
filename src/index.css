@@ -5,8 +5,43 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'handwriting-2019';
+  src: url('/fonts/handwriting-2019.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'handwriting-2020';
+  src: url('/fonts/handwriting-2020.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'handwriting-2021';
+  src: url('/fonts/handwriting-2021.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'handwriting-2022';
+  src: url('/fonts/handwriting-2022.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'handwriting-2023';
+  src: url('/fonts/handwriting-2023.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
-  font-family: 'RIDIBatang', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'RIDIBatang', 'handwriting-2019', 'handwriting-2020', 'handwriting-2021', 'handwriting-2022', 'handwriting-2023', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 

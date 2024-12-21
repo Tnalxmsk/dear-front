@@ -5,6 +5,8 @@ import RootLayout from '../../layout/RootLayout.tsx';
 import LetterboxPage from '../../pages/letterbox/LetterboxPage.tsx';
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
 import SealingWax from '../../pages/write/SealingWax.tsx';
+import AuthPage from '../../pages/auth/AuthPage.tsx';
+import NaverCallbackPage from '../../pages/auth/NaverCallback.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +33,13 @@ export const router = createBrowserRouter([
         path: 'sealing-wax',
         element: <SealingWax />,
       }
+        path: '/auth',
+        element: <AuthPage />,
+      },
+      {
+        path: '/auth/naver-callback', // 네이버 로그인 콜백 경로
+        element: <NaverCallbackPage />,
+      },
     ],
   },
 ]);
