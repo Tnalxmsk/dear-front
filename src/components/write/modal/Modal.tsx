@@ -76,7 +76,7 @@ const CloseButton = styled.button`
 
 const ActionButton = styled.button`
     padding: 0.5rem 1rem;
-    background-color: #007bff;
+    background-color: #2E2E2E;
     color: #fff;
     border: none;
     border-radius: 4px;

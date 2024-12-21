@@ -1,148 +1,156 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import NavigationControls from '../../components/write/NavigationControls.tsx';
-import LetterHeader from '../../components/write/LetterHeader.tsx';
-import RandomQuote from '../../components/write/RandomQuote.tsx';
-import ImageUploadSection from '../../components/write/ImageUploadSection.tsx';
-import EditableContentArea from '../../components/write/EditableContentArea.tsx';
-import Footer from '../../components/write/Footer.tsx';
-import Modal from '../../components/write/modal/Modal.tsx';
+  import React, { useState } from 'react';
+  import styled from 'styled-components';
+  import { useNavigate } from 'react-router-dom';
+  import LetterHeader from '../../components/write/LetterHeader';
+  import EditableContentArea from '../../components/write/EditableContentArea';
+  import Footer from '../../components/write/Footer';
+  import ImageUploadSection from '../../components/write/ImageUploadSection';
 
+  const WritePage: React.FC = () => {
+      const navigate = useNavigate();
+      const [recipient, setRecipient] = useState<string | null>('Recipient Name');
+      const [imageUploaded, setImageUploaded] = useState<boolean>(false);
+      const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+      const [isPublic, setIsPublic] = useState<boolean>(false);
 
-const WritePage: React.FC = () => {
-  const [step, setStep] = useState<number>(1);
-  const [recipient, setRecipient] = useState<string | null>('Recipient Name');
-  const [imageUploaded, setImageUploaded] = useState<boolean>(false);
-  const [imageDescription, setImageDescription] = useState<string>('');
-  const [isPublic, setIsPublic] = useState<boolean>(false);
-  const [isSelfWriting, setIsSelfWriting] = useState<boolean>(false);
-  const [isRegistered, setIsRegistered] = useState<boolean>(true);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // State for modal visibility
-  const [modalMessage, setModalMessage] = useState<string>(''); // Dynamic modal message
-  const [modalButtonText, setModalButtonText] = useState<string>(''); // Dynamic modal button text
+      const handleInsertImage = (imageUrl: string) => {
+          if (!uploadedImageUrl) { // Prevent duplicate image insertions
+              const editableArea = document.querySelector('[contenteditable="true"]');
+              if (editableArea) {
+                  const img = document.createElement('img');
+                  img.src = imageUrl;
+                  img.alt = 'Uploaded Image';
+                  img.style.maxWidth = '80%';
+                  img.style.margin = '10px auto';
+                  img.style.display = 'block';
+                  editableArea.appendChild(img);
+                  setUploadedImageUrl(imageUrl); // Store the uploaded image URL
+                  setImageUploaded(true); // Set image uploaded state to true
+              }
+          }
+      };
 
-  const handleImageUpload = () => {
-    setImageUploaded(true);
+      const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+          const file = e.target.files?.[0];
+          if (file) {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                  if (event.target?.result) {
+                      handleInsertImage(event.target.result as string);
+                  }
+              };
+              reader.readAsDataURL(file);
+          }
+      };
+
+      const handleComplete = () => {
+          if (!imageUploaded) {
+              alert('이미지를 넣어야 편지 작성이 완료됩니다!');
+          } else {
+              navigate('/sealing-wax');
+          }
+      };
+
+      return (
+          <WritePageContainer>
+              <LetterContainer>
+                <br/>
+                  <LetterHeader
+                      recipient={recipient}
+                      isSelfWriting={false}
+                      isRegistered={true}
+                  />
+                  <br/>
+                  <ContentSection>
+                      <EditableContentArea />
+                      {/* Display ImageUploadSection only if no image is uploaded */}
+                      {!imageUploaded && (
+                          <ImageUploadSection onInsertImage={handleInsertImage} />
+                      )}
+                      {/* Display uploaded image if exists */}
+                      {uploadedImageUrl && <UploadedImage src={uploadedImageUrl} alt="Uploaded" />}
+                      <EditableContentArea />
+                  </ContentSection>
+
+                  <Footer
+                      senderName="Kai"
+                      isPublic={isPublic}
+                      onPublicChange={setIsPublic}
+                  />
+              </LetterContainer>
+
+              <CompleteButtonWrapper>
+                  <CompleteButton onClick={handleComplete}>작성 완료</CompleteButton>
+              </CompleteButtonWrapper>
+              <br/>
+          </WritePageContainer>
+      );
   };
 
-  const handleNextStep = () => {
-    if (step === 3 && !imageUploaded) {
-      setModalMessage('이미지를 넣어야 편지 작성이 완료됩니다!');
-      setModalButtonText('이미지 업로드');
-      setIsModalOpen(true);
-      return;
-    }
-    if (step < 5) setStep(step + 1);
-  };
+  export default WritePage;
 
-  const handleComplete = () => {
-    if (!imageUploaded) {
-      setModalMessage('이미지를 넣어야 편지 작성이 완료됩니다!');
-      setModalButtonText('이미지 업로드');
-      setIsModalOpen(true);
-    } else {
-      setModalMessage('편지가 발송되었습니다.\n보낸 편지는 우편함에서 확인 가능합니다.');
-      setModalButtonText('우편함 바로가기');
-      setIsModalOpen(true);
-    }
-  };
+  const WritePageContainer = styled.div`
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      background: url('/images/BG3.png') no-repeat center center;
+      background-size: cover;
+      overflow-y: auto;
+      padding: 2rem 0;
+  `;
 
-  const handleModalButtonClick = () => {
-    if (!imageUploaded) {
-      // Handle image upload action
-      setIsModalOpen(false);
-    } else {
-      // Redirect to mailbox
-      alert('우편함으로 이동합니다!');
-      setIsModalOpen(false);
-    }
-  };
+  const LetterContainer = styled.div`
+      width: 70%;
+      max-width: 800px;
+      background: url('/images/Letter paper=2.png') no-repeat center top;
+      background-size: cover;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      margin-bottom: 2rem;
+  `;
 
-  return (
-    <WritePageContainer>
-      <NavigationControls
-        step={step}
-        onPrevious={() => setStep((prev) => Math.max(prev - 1, 1))}
-        onNext={handleNextStep}
-        isNextDisabled={step === 5}
-      />
+  const ContentSection = styled.div`
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      overflow-y: auto;
+      padding: 1rem;
+      background: transparent;
+      border: 1px dashed #ccc;
+      border-radius: 8px;
+  `;
 
-      <LetterContainer>
-        <LetterHeader
-          recipient={recipient}
-          isSelfWriting={isSelfWriting}
-          isRegistered={isRegistered}
-        />
+  const CompleteButtonWrapper = styled.div`
+      position: relative;
+      display: inline-block;
+  `;
 
-        {step === 1 && <RandomQuote />}
+  const CompleteButton = styled.button`
+      width: 100px;
+      height: 100px;
+      background-color: #2E2E2E;
+      border: none;
+      cursor: pointer;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  `;
 
-        {step === 3 && (
-          <ImageUploadSection
-            imageUploaded={imageUploaded}
-            onUpload={handleImageUpload}
-            imageDescription={imageDescription}
-            onDescriptionChange={setImageDescription}
-          />
-        )}
-
-        <EditableContentArea />
-
-        <Footer
-          senderName="작성자"
-          isPublic={isPublic}
-          onPublicChange={setIsPublic}
-        />
-      </LetterContainer>
-
-      <CompleteButton onClick={handleComplete}>작성 완료</CompleteButton>
-
-      {/* Modal */}
-      <Modal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        message={modalMessage}
-        buttonText={modalButtonText}
-        onButtonClick={handleModalButtonClick}
-      />
-    </WritePageContainer>
-  );
-};
-
-export default WritePage;
-
-const WritePageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background: url('/images/BG3.png') no-repeat center center;
-  background-size: cover;
-  color: #000;
-`;
-
-const LetterContainer = styled.div`
-  width: 800px;
-  height: 1000px;
-  background: url('/images/Letter paper=2.png') no-repeat center center;
-  background-size: cover;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  color: #000;
-`;
-
-const CompleteButton = styled.button`
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
+  const UploadedImage = styled.img`
+      max-width: 100%;
+      margin: 10px auto;
+      display: block;
+      border-radius: 8px;
+  `;

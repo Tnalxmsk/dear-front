@@ -1,9 +1,10 @@
 import { createBrowserRouter } from 'react-router';
 import HomePage from '../../pages/home/HomePage.tsx';
-import WritePage from '../../pages/write/WritePage.tsx';
+import WritePage from '../../pages/write/WritePage.tsx'
 import RootLayout from '../../layout/RootLayout.tsx';
 import LetterboxPage from '../../pages/letterbox/LetterboxPage.tsx';
 import LetterCreatePage from '../../pages/write/LetterCreatePage.tsx';
+import SealingWax from '../../pages/write/SealingWax.tsx';
 import AuthPage from '../../pages/auth/AuthPage.tsx';
 import NaverCallbackPage from '../../pages/auth/NaverCallback.tsx';
 
@@ -29,6 +30,9 @@ export const router = createBrowserRouter([
         element: <LetterboxPage />,
       },
       {
+        path: 'sealing-wax',
+        element: <SealingWax />,
+      }
         path: '/auth',
         element: <AuthPage />,
       },
