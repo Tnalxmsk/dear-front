@@ -2,17 +2,21 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import StatusBar from '../../components/write/StatusBar.tsx';
 import { useNavigate } from 'react-router-dom';
-import { PaperType } from '../../types/write/write.ts';
 import Letter from '../../components/write/Letter.tsx';
 import { getStepTitle } from '../../utils/getStepTitle.ts';
 import { FontType } from '../../types/write/font.ts';
 import Font from '../../components/write/Font.tsx';
 import EmailForm from '../../components/write/EmailForm.tsx';
+import { useGetAvailablePaper } from '../../hooks/query/useGetAvailablePaper.tsx';
 
 const LetterCreatePage = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const title = getStepTitle(step);
+  const { data, isPending, isError } = useGetAvailablePaper();
+
+  if (isPending) return <div>Loading...</div>;
+  if (isError) return <div>Error</div>;
 
   const handleBack = () => {
     if (step === 1) {
@@ -38,8 +42,8 @@ const LetterCreatePage = () => {
       </SecondHeader>
       {step === 1 ? (
         <PaperListContainer>
-          {Object.values(PaperType).map((type) => (
-            <Letter key={type} type={type} />
+          {data?.letterPaperList.map((type) => (
+            <Letter key={type.name} type={type} />
           ))}
         </PaperListContainer>
       ) : null}
@@ -51,7 +55,7 @@ const LetterCreatePage = () => {
         </FontListContainer>
       ) : null}
       {step === 3 ? (
-        <div style={{ padding: '0 20%', marginTop: '60px'}}>
+        <div style={{ padding: '0 20%', marginTop: '60px' }}>
           <EmailForm />
         </div>
       ) : null}
