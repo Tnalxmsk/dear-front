@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 
-const DetailContainer = styled.div<{ backgroundImage: string }>`
+export const DetailContainer = styled.div<{ backgroundImage: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,7 +82,7 @@ const QuoteAuthor = styled.p`
 `;
 
 
-const ContentContainer = styled.div`
+export const ContentContainer = styled.div`
   flex: 1;
   width: 90%;
   margin: 2rem auto;
@@ -91,7 +91,7 @@ const ContentContainer = styled.div`
   align-items: center;
 `;
 
-const ContentText = styled.p`
+export const ContentText = styled.p`
   font-size: 1.2rem;
   line-height: 1.8;
   color: #333;
@@ -100,28 +100,49 @@ const ContentText = styled.p`
   text-align: justify;
 `;
 
-const ImageFrame = styled.div`
+export const ImageFrame = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 3rem 0; 
-  width: 100%;
+  justify-content: center;
+  margin: 3rem 0;
+  width: 500px; /* 프레임 크기 고정 */
+  height: 479px;
 `;
 
-const Image = styled.img`
-  max-width: 100%;
-  max-height: 20rem;
-  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.15);
+export const Image = styled.img`
+  position: relative; /* 프레임 위에 이미지 표시 */
+  margin-right: 20px;
+  z-index: 2; /* 프레임보다 위에 표시 */
+  width: 400px; /* 프레임 크기에 맞게 조정 */
+  height: 335px; /* 프레임 크기에 맞게 조정 */
+  object-fit: cover; /* 이미지 비율 유지 */
+  margin-top: 1.2rem;
 `;
 
-const ImageCaption = styled.div`
+export const ImageCaption = styled.div`
+  width: 80%; /* 설명 너비를 프레임 크기에 맞춤 */
+  text-align: right; /* 오른쪽 정렬 */
+  padding: 1.2rem 1rem;
+  border-radius: 5px;
   font-size: 0.9rem;
   color: #666;
-  margin-top: 0.625rem;
-  text-align: center;
+  z-index: 3; /* 이미지 위에 표시 */
+  line-height: 1.4;
+
+  
 `;
 
 
+export const FrameImage = styled.img`
+  position: absolute; /* 프레임을 고정 위치에 배치 */
+  top: 0;
+  left: 0;
+  width: 100%; /* 프레임의 너비 */
+  height: 100%; /* 프레임의 높이 */
+  z-index: 1; /* 프레임이 이미지 아래로 표시되도록 설정 */
+`;
 const NavigationContainer = styled.div`
   position: absolute;
   bottom: -1.25rem;
@@ -291,6 +312,22 @@ const RecipientEmail = styled.span`
   font-size: 0.9rem;
   color: #666;
 `;
+
+const ImageCaptionText = styled.div`
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: #000000;
+  font-weight: bold; /* 강조 스타일 추가 */
+`;
+
+const ImageCaptionDate = styled.div`
+  font-size: 0.8rem;
+  color: #999;
+  font-style: italic; /* 이탤릭 스타일 추가 */
+  text-align: right; /* 날짜를 오른쪽 정렬 */
+  margin-top: 0.2rem;
+`;
+
 const Styles = {
   DetailContainer,
   SenderInfo,
@@ -327,8 +364,12 @@ const Styles = {
   RecipientInfo,
   RecipientLabel,
   RecipientName,
-  RecipientEmail
+  RecipientEmail,
+  FrameImage,
+  ImageCaptionText,
+  ImageCaptionDate,
+  
 
 };
 
-export default Styles;
+export default Styles; 
