@@ -17,7 +17,7 @@ const Font = ({ type }: FontProps) => {
       </Top>
       <Bottom>
         <Example $fontType={type}>{example}</Example>
-        <ClickableSVG width="40" height="40"/>
+        <ClickableSVG width="40" height="40" />
       </Bottom>
       <Divider />
     </Container>
@@ -65,20 +65,23 @@ const Example = styled.p<{ $fontType: FontType }>`
   font-family: ${(props) => {
     switch (props.$fontType) {
       case FontType.TYPE_1:
-        return "'KyoboHand2019', sans-serif"; // 교보 손글씨 2019
+        return 'handwriting-2019';
       case FontType.TYPE_2:
-        return "'KyoboHand2020', sans-serif"; // 교보 손글씨 2020
+        return 'handwriting-2020';
       case FontType.TYPE_3:
-        return "'KyoboHand2021', sans-serif"; // 교보 손글씨 2021
+        return 'handwriting-2021';
       case FontType.TYPE_4:
-        return "'KyoboHand2022', sans-serif"; // 교보 손글씨 2022
+        return 'handwriting-2022';
       case FontType.TYPE_5:
-        return "'KyoboHand2023', sans-serif"; // 교보 손글씨 2023
+        return 'handwriting-2023';
       default:
-        return 'Arial, sans-serif'; // 기본 폰트
+        return 'handwriting-2019';
     }
   }};
-  font-size: 16px;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 30px;
+  letter-spacing: 0%;
   color: #000;
 `;
 
